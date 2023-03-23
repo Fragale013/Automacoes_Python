@@ -26,8 +26,8 @@ from DisparoWppDestinos import lista_envio
 #Nessa etapa iremos definir as variáveis utilizadas nas funções, atualmente os elementos interagíveis na tela estão mapeados via XPATH com os endereçáveis abaixo
 url = 'https://web.whatsapp.com/'
 imagem_entrada = '//*[@id="app"]/div/div/div[3]/header/div[1]'
-caixa_pesquisa_contatos = '//*[@id="side"]/div[1]/div/div/div[2]/div/div[2]'
-caixa_mensagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p'
+caixa_pesquisa_contatos = '//*[@id="side"]/div[1]/div/div/div[2]/div/div[1]/p'
+caixa_mensagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p' 
 clips_anexos = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div/span'
 anexo_imagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input'
 botao_enviar = '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div'
