@@ -25,12 +25,14 @@ from DisparoWppDestinos import lista_envio
 
 #Nessa etapa iremos definir as variáveis utilizadas nas funções, atualmente os elementos interagíveis na tela estão mapeados via XPATH com os endereçáveis abaixo
 url = 'https://web.whatsapp.com/'
-imagem_entrada = '//*[@id="app"]/div/div/div[3]/header/div[1]'
+imagem_entrada = '//*[@id="app"]/div/div/div[3]/header/div[1]/div/img'
 caixa_pesquisa_contatos = '//*[@id="side"]/div[1]/div/div/div[2]/div/div[1]/p'
-caixa_mensagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p' 
+caixa_mensagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[2]/div[1]/div/div[1]/p'
 clips_anexos = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/div/span'
 anexo_imagem = '//*[@id="main"]/footer/div[1]/div/span[2]/div/div[1]/div[2]/div/span/div/div/ul/li[1]/button/input'
-botao_enviar = '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div/div'
+botao_enviar = '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[2]/div[2]/div'
+caixa_mensagem_imagem = '//*[@id="app"]/div/div/div[2]/div[2]/span/div/span/div/div/div[2]/div/div[1]/div[3]/div/div/div[2]/div[1]/div[1]/p'
+
 
 
 #Aqui vamos declarar as funções que serão chamadas na aplicação:
@@ -46,7 +48,11 @@ def login():
     servico = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=servico, options=options1)
     driver.get(url)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, imagem_entrada)))
+    sleep(10)
+    print('Aguardando código QR')
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, caixa_pesquisa_contatos)))
+    print('Login realizado com sucesso!')
+    sleep(5)
     driver.quit()
 ##################################################
     
@@ -57,8 +63,9 @@ def enviar(destino, arquivo):
     options1.add_argument(r"user-data-dir={}".format('C:/CacheWpp'))
     servico = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=servico, options=options1)
+    action = ActionChains(driver)
     driver.get(url)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, imagem_entrada)))
+    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, caixa_pesquisa_contatos)))
     driver.find_element(By.XPATH, caixa_pesquisa_contatos).send_keys(destino)
     sleep(3)
     driver.find_element(By.XPATH, caixa_pesquisa_contatos).send_keys(Keys.ENTER)
@@ -67,7 +74,9 @@ def enviar(destino, arquivo):
     sleep(5)
     driver.find_element(By.XPATH, anexo_imagem).send_keys(f'{arquivo}.jpg')
     sleep(4)
-    driver.find_element(By.XPATH, botao_enviar).click()
+    action.key_down(Keys.ENTER)
+    action.key_up(Keys.ENTER)
+    action.perform()
     sleep(5)
     driver.quit()
 ##################################################
