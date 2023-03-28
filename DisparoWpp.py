@@ -21,6 +21,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from DisparoWppDestinos import lista_envio
+from selenium.webdriver.common.action_chains import ActionChains
 
 
 #Nessa etapa iremos definir as variáveis utilizadas nas funções, atualmente os elementos interagíveis na tela estão mapeados via XPATH com os endereçáveis abaixo
